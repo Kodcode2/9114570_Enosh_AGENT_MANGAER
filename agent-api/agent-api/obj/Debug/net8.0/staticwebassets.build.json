@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "TFG0yfdSxBAK6aZi8O/6a4/42uwpJvYnu2G7cmAPvWQ=",
+  "Source": "agent-api",
+  "BasePath": "_content/agent-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

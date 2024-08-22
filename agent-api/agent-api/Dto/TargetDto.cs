@@ -9,7 +9,7 @@ namespace agent_api.Dto
         public string notes { get; set; }
         public string Image {  get; set; }
         public TargetStatus TargetStatus { get; set; }
-        LocationModel TargetLocation { get; set; }
+        public LocationModel TargetLocation { get; set; }
 
 
     }

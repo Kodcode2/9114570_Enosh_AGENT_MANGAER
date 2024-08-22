@@ -15,7 +15,7 @@ namespace agent_api.Controllers
         [ProducesResponseType(typeof(TargetDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public async Task<ActionResult<TargetDto>> CreateTarget([FromBody] TargetDto targetDto)
+        public async Task<ActionResult<TargetDto>> CreateTarget([FromBody] TargetDto targetDto)
         {
             try
             {
@@ -28,10 +28,12 @@ namespace agent_api.Controllers
             }
         }
 
+
+
         [HttpGet("Targets")]
         [ProducesResponseType(typeof(List<TargetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<List<TargetDto>>> GetAllTargets()
+        public async Task<ActionResult<List<TargetDto>>> GetAllTargets()
         {
             try
             {
@@ -43,6 +45,22 @@ namespace agent_api.Controllers
             }
         }
 
+
+        [HttpPut("Targets/{id}/Pin")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> PinTarget([FromBody] PinLocationDto pinLocation, long id)
+        {
+            try
+            {
+                await targetService.PinTargetAsync(pinLocation, id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }
 }

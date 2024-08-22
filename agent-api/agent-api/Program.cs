@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextFactory<ApplicationDBContext>();
 builder.Services.AddScoped<ITargetInterface, TargetService>();
+builder.Services.AddScoped<IAgentService, AgentService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

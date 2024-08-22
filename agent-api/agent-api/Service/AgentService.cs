@@ -6,7 +6,7 @@ using static agent_api.Utils.AgentUtils;
 using static agent_api.Utils.LocationUtils;
 namespace agent_api.Service
 {
-    public class AgentService(ApplicationDBContext dBContext) : IAgentService
+    public class AgentService(ApplicationDBContext dBContext, IMissionService missionService) : IAgentService
     {
         public async Task<AgentDto> CreateAgentAsync(AgentDto targetDto)
         {
@@ -48,6 +48,7 @@ namespace agent_api.Service
                 agentToSet.AgentLocation.x = Location.x;
                 agentToSet.AgentLocation.y = Location.y;
                 await dBContext.SaveChangesAsync();
+                await missionService.CreateMissionsAsync(agentToSet);
             }
             else
             {

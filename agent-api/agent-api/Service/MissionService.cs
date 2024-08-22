@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using static agent_api.Utils.DistanceUtils;
 namespace agent_api.Service
 {
-    public class MissionService(IDbContextFactory<ApplicationDBContext> dBContextFactory) : IMissionService
+    public class MissionService(ApplicationDBContext dBContext) : IMissionService
     {
 
         static Func<AgentModel, TargetModel, bool> AreInDistanceForMission =
@@ -38,7 +38,7 @@ namespace agent_api.Service
 
         async Task AddMissionsAsync(List<MissionModel> missions)
         {
-            ApplicationDBContext dBContext = await dBContextFactory.CreateDbContextAsync();
+            
             await dBContext.AddRangeAsync(missions);
             await dBContext.SaveChangesAsync();
         }
@@ -48,7 +48,7 @@ namespace agent_api.Service
 
         public async Task CreateMissionsAsync(AgentModel agent)
         {
-            ApplicationDBContext dBContext = await dBContextFactory.CreateDbContextAsync();
+           
             List<TargetModel> targets = await dBContext.Targets.ToListAsync();
             List<MissionModel> missions = GetListOfAvailbleMissionsByAgent(targets, agent);
             await AddMissionsAsync(missions);
@@ -57,7 +57,7 @@ namespace agent_api.Service
 
         public async Task CreateMissionsAsync(TargetModel target)
         {
-            ApplicationDBContext dBContext = await dBContextFactory.CreateDbContextAsync();
+            
             List<AgentModel> agents = await dBContext.Agents.ToListAsync();
             List<MissionModel> missions = GetListOfAvailbleMissionsByTarget(agents, target);
             await AddMissionsAsync(missions);

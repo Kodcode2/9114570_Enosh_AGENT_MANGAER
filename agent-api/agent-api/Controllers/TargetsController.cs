@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace agent_api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class TestController(ITargetInterface targetService) : ControllerBase
+    public class TargetsController(ITargetInterface targetService) : ControllerBase
     {
 
-        [HttpPost("Targets")]
+        [HttpPost]
         [ProducesResponseType(typeof(TargetDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -30,7 +30,7 @@ namespace agent_api.Controllers
 
 
 
-        [HttpGet("Targets")]
+        [HttpGet]
         [ProducesResponseType(typeof(List<TargetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<TargetDto>>> GetAllTargets()
@@ -46,14 +46,30 @@ namespace agent_api.Controllers
         }
 
 
-        [HttpPut("Targets/{id}/Pin")]
+        [HttpPut("{id}/Pin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> PinTarget([FromBody] PinLocationDto pinLocation, long id)
+        public async Task<ActionResult> PinTarget([FromBody] LocationDto pinLocation, long id)
         {
             try
             {
-                await targetService.PinTargetAsync(pinLocation, id);
+                await targetService.PinTargetLocationAsync(pinLocation, id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpPut("{id}/Move")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> MoveTarget([FromBody] DirectionDto direction, long id)
+        {
+            try
+            {
+                await targetService.MoveTargetLocationAsync(direction, id);
                 return NoContent();
             }
             catch (Exception ex)

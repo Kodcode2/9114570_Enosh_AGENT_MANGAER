@@ -28,24 +28,42 @@ namespace agent_api.Service
             return targets.Select(TargetModelToTargetDto).ToList();
         }
 
-        public async Task PinTargetAsync(PinLocationDto pinLocation, long id)
+        public async Task MoveTargetLocationAsync(DirectionDto direction, long id)
         {
-            if (IsLocationLegal(pinLocation))
+            TargetModel target = await GetTargetByIdAsync(id);
+            var newLocation = UpdateLocation(target.TargetLocation, direction);
+            await SetTargetLocation(newLocation, id);
+        }
+
+
+        private async Task<TargetModel> GetTargetByIdAsync(long id) 
+            => await dBContext.Targets
+                .Include(t => t.TargetLocation)
+                .FirstOrDefaultAsync(t => t.TargetId == id)
+                ?? throw new Exception($"Target by id:{id} not found ");
+
+
+        private async Task SetTargetLocation(LocationDto Location, long id)
+        {
+            if (IsLocationLegal(Location))
             {
 
-                TargetModel targetToPin = await dBContext.Targets
-                    .Include(target => target.TargetLocation)
-                    .FirstOrDefaultAsync(target => target.TargetId == id)
-                    ?? throw new Exception($"Target by id:{id} not found ");
+                TargetModel targetToPin = await GetTargetByIdAsync(id);
 
-                targetToPin.TargetLocation.x = pinLocation.x;
-                targetToPin.TargetLocation.y = pinLocation.y;
+                targetToPin.TargetLocation.x = Location.x;
+                targetToPin.TargetLocation.y = Location.y;
                 await dBContext.SaveChangesAsync();
             }
             else
             {
-                throw new Exception("cannot pin user at elegal location");
+                throw new Exception("cannot set target at elegal location");
             }
+        }
+
+
+        public async Task PinTargetLocationAsync(LocationDto pinLocation, long id)
+        {
+            await SetTargetLocation(pinLocation, id);
         }
     }
 }

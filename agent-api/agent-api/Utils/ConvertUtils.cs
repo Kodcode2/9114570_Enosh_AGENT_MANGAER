@@ -5,6 +5,7 @@ namespace agent_api.Utils
 {
     public class ConvertUtils
     {
+         
 
         public static Func<TargetDto, TargetModel> TargetDtoToTargetModel =
             (dto) => new()
@@ -29,7 +30,6 @@ namespace agent_api.Utils
             };
 
 
-        
 
     }
 }

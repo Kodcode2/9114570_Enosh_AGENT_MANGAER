@@ -7,8 +7,8 @@ namespace agent_api.Service
     {
         Task<List<TargetDto>> GetAllTargetsAsync();
         Task<TargetDto> CreateTargetAsync(TargetDto targetDto);
-
-        Task PinTargetAsync(PinLocationDto pinLocation, long id);
+        Task PinTargetLocationAsync(LocationDto pinLocation, long id);
+        Task MoveTargetLocationAsync(DirectionDto direction, long id);
 
     }
 }

@@ -10,7 +10,7 @@ namespace agent_api.Utils
         static Func<LocationModel, LocationModel, double> CalculateDistanceBetweenTwoLocationModels =
             (model1, model2) => CalculateDistanceBetweenTwoPoints((model1.x, model1.y), (model2.x, model2.x));
 
-        static Func<LocationModel, LocationModel, bool> IsDistanceLessThan200KM =
+        public static Func<LocationModel, LocationModel, bool> IsDistanceLessThan200KM =
             (location1, location2) => CalculateDistanceBetweenTwoLocationModels(location1, location2) < 200;
 
 

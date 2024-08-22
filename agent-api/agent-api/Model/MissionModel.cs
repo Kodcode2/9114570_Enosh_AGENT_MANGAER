@@ -28,6 +28,6 @@ namespace agent_api.Model
 
         public TargetModel Target { get; set; }
 
-        public LocationModel MissionFinalLocation { get; set; }
+        public LocationModel MissionFinalLocation { get; set; } = new LocationModel();
     }
 }

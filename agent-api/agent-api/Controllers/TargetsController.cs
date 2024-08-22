@@ -51,15 +51,10 @@ namespace agent_api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> PinTarget([FromBody] LocationDto pinLocation, long id)
         {
-            try
-            {
+            
                 await targetService.PinTargetLocationAsync(pinLocation, id);
                 return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+           
         }
         
         [HttpPut("{id}/Move")]

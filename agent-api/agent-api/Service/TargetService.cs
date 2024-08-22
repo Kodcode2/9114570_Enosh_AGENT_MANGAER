@@ -8,7 +8,7 @@ using static agent_api.Utils.LocationUtils;
 
 namespace agent_api.Service
 {
-    public class TargetService(ApplicationDBContext dBContext) : ITargetInterface
+    public class TargetService(ApplicationDBContext dBContext, IMissionService missionService) : ITargetInterface
     {
 
         
@@ -49,10 +49,10 @@ namespace agent_api.Service
             {
 
                 TargetModel targetToPin = await GetTargetByIdAsync(id);
-
                 targetToPin.TargetLocation.x = Location.x;
                 targetToPin.TargetLocation.y = Location.y;
                 await dBContext.SaveChangesAsync();
+                await missionService.CreateMissionsAsync(targetToPin);
             }
             else
             {

@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using static agent_api.Utils.DistanceUtils;
 namespace agent_api.Service
 {
-    public class MissionService(ApplicationDBContext dBContext) : IMissionService
+    public class MissionService(IDbContextFactory<ApplicationDBContext> dBContextFactory) : IMissionService
     {
 
         static Func<AgentModel, TargetModel, bool> AreInDistanceForMission =
             (agent, target) => IsDistanceLessThan200KM(agent.AgentLocation, target.TargetLocation);
 
-        //static Func<List<AgentModel>, TargetModel, List<AgentModel>> GetAllAgentsWithin200KMOfTarget =
-        //    (agents, target) => agents.Where(agent => AreInDistanceForMission(agent, target)).ToList();
+        static Func<List<AgentModel>, TargetModel, List<AgentModel>> GetAllAgentsWithin200KMOfTarget =
+            (agents, target) => agents.Where(agent => AreInDistanceForMission(agent, target)).ToList();
 
-        //static Func<List<TargetModel>, AgentModel, List<TargetModel>> GetAllTargetsWithin200KMOfAgent =
-        //    (targets, agent) => targets.Where(target =>  AreInDistanceForMission(agent, target)).ToList();
+        static Func<List<TargetModel>, AgentModel, List<TargetModel>> GetAllTargetsWithin200KMOfAgent =
+            (targets, agent) => targets.Where(target => AreInDistanceForMission(agent, target)).ToList();
 
         static Func<AgentModel, TargetModel, MissionModel> CreateMissionModel =
             (agent, target) => new()
@@ -29,9 +29,16 @@ namespace agent_api.Service
         static Func<List<TargetModel>, AgentModel, List<MissionModel>> CreateListOfMissionModelsWithOneAgent =
             (targets, agent) => targets.Select(target => CreateMissionModel(agent, target)).ToList();
 
-        
+        static Func<List<TargetModel>, AgentModel, List<MissionModel>> GetListOfAvailbleMissionsByAgent =
+            (targets, agent) => CreateListOfMissionModelsWithOneAgent(GetAllTargetsWithin200KMOfAgent(targets, agent), agent);
+        static Func<List<AgentModel>, TargetModel, List<MissionModel>> GetListOfAvailbleMissionsByTarget = 
+            (agents, target) => CreateListOfMissionModelsWithOneTarget(GetAllAgentsWithin200KMOfTarget(agents, target), target);
+
+
+
         async Task AddMissionsAsync(List<MissionModel> missions)
         {
+            ApplicationDBContext dBContext = await dBContextFactory.CreateDbContextAsync();
             await dBContext.AddRangeAsync(missions);
             await dBContext.SaveChangesAsync();
         }
@@ -41,20 +48,18 @@ namespace agent_api.Service
 
         public async Task CreateMissionsAsync(AgentModel agent)
         {
-             List<TargetModel> targets = await dBContext.Targets
-                .Where(target => AreInDistanceForMission(agent, target))
-                .ToListAsync();
-            List<MissionModel> missions = CreateListOfMissionModelsWithOneAgent(targets, agent);
+            ApplicationDBContext dBContext = await dBContextFactory.CreateDbContextAsync();
+            List<TargetModel> targets = await dBContext.Targets.ToListAsync();
+            List<MissionModel> missions = GetListOfAvailbleMissionsByAgent(targets, agent);
             await AddMissionsAsync(missions);
 
         }
 
         public async Task CreateMissionsAsync(TargetModel target)
         {
-            List<AgentModel> agents = await dBContext.Agents
-                .Where(agent =>  AreInDistanceForMission(agent, target))
-                .ToListAsync();
-            List<MissionModel> missions = CreateListOfMissionModelsWithOneTarget(agents, target);
+            ApplicationDBContext dBContext = await dBContextFactory.CreateDbContextAsync();
+            List<AgentModel> agents = await dBContext.Agents.ToListAsync();
+            List<MissionModel> missions = GetListOfAvailbleMissionsByTarget(agents, target);
             await AddMissionsAsync(missions);
         }
     }

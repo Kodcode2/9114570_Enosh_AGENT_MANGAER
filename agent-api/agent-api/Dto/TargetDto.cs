@@ -1,6 +1,16 @@
-﻿namespace agent_api.Dto
+﻿using agent_api.Model;
+
+namespace agent_api.Dto
 {
     public class TargetDto
     {
+        public long TargetId { get; set; }
+        public string Name { get; set; }
+        public string notes { get; set; }
+        public string Image {  get; set; }
+        public TargetStatus TargetStatus { get; set; }
+        LocationModel TargetLocation { get; set; }
+
+
     }
 }

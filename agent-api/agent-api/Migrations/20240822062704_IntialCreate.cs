@@ -33,7 +33,7 @@ namespace agent_api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AgentNickName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AgentPicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AgentStatus = table.Column<int>(type: "int", nullable: false),
+                    AgentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AgentLocationId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -55,7 +55,7 @@ namespace agent_api.Migrations
                     TargetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TargetRole = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TargetPicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TargetStatus = table.Column<int>(type: "int", nullable: false),
+                    TargetStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TargetLocationId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -78,7 +78,7 @@ namespace agent_api.Migrations
                     TargetId = table.Column<long>(type: "bigint", nullable: false),
                     MissionFinalLocationId = table.Column<long>(type: "bigint", nullable: false),
                     MissionTime = table.Column<double>(type: "float", nullable: false),
-                    MissionStatus = table.Column<int>(type: "int", nullable: false),
+                    MissionStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MissionCompletedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -88,7 +88,8 @@ namespace agent_api.Migrations
                         name: "FK_Missions_Agents_AgentId",
                         column: x => x.AgentId,
                         principalTable: "Agents",
-                        principalColumn: "AgentId");
+                        principalColumn: "AgentId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Missions_LocationModel_MissionFinalLocationId",
                         column: x => x.MissionFinalLocationId,
@@ -98,7 +99,8 @@ namespace agent_api.Migrations
                         name: "FK_Missions_Targets_TargetId",
                         column: x => x.TargetId,
                         principalTable: "Targets",
-                        principalColumn: "TargetId");
+                        principalColumn: "TargetId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -121,8 +123,7 @@ namespace agent_api.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Missions_TargetId",
                 table: "Missions",
-                column: "TargetId",
-                unique: true);
+                column: "TargetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Targets_TargetLocationId",

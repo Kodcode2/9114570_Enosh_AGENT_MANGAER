@@ -11,7 +11,7 @@ namespace agent_api.Model
     }
     public class AgentModel
     {
-        [Key]
+        
         public long AgentId { get; set; }
         public required string AgentNickName { get; set; }
         public required string AgentPicture { get; set; }       

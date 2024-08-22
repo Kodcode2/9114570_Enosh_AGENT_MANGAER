@@ -12,7 +12,7 @@ namespace agent_api.Model
     }
     public class MissionModel
     {
-        [Key]
+        
         public long MissionId { get; set; }
         public long AgentId { get; set; }
         public long TargetId { get; set; }

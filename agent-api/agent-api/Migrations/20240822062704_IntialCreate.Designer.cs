@@ -12,7 +12,7 @@ using agent_api.Data;
 namespace agent_api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240821142202_IntialCreate")]
+    [Migration("20240822062704_IntialCreate")]
     partial class IntialCreate
     {
         /// <inheritdoc />
@@ -44,8 +44,9 @@ namespace agent_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AgentStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("AgentStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AgentId");
 
@@ -91,8 +92,9 @@ namespace agent_api.Migrations
                     b.Property<long>("MissionFinalLocationId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("MissionStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("MissionStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("MissionTime")
                         .HasColumnType("float");
@@ -107,8 +109,7 @@ namespace agent_api.Migrations
                     b.HasIndex("MissionFinalLocationId")
                         .IsUnique();
 
-                    b.HasIndex("TargetId")
-                        .IsUnique();
+                    b.HasIndex("TargetId");
 
                     b.ToTable("Missions");
                 });
@@ -136,8 +137,9 @@ namespace agent_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TargetStatus")
-                        .HasColumnType("int");
+                    b.Property<string>("TargetStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TargetId");
 
@@ -163,7 +165,7 @@ namespace agent_api.Migrations
                     b.HasOne("agent_api.Model.AgentModel", "Agent")
                         .WithMany("Missions")
                         .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("agent_api.Model.LocationModel", "MissionFinalLocation")
@@ -173,9 +175,9 @@ namespace agent_api.Migrations
                         .IsRequired();
 
                     b.HasOne("agent_api.Model.TargetModel", "Target")
-                        .WithOne("Mission")
-                        .HasForeignKey("agent_api.Model.MissionModel", "TargetId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .WithMany("Missions")
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Agent");
@@ -203,8 +205,7 @@ namespace agent_api.Migrations
 
             modelBuilder.Entity("agent_api.Model.TargetModel", b =>
                 {
-                    b.Navigation("Mission")
-                        .IsRequired();
+                    b.Navigation("Missions");
                 });
 #pragma warning restore 612, 618
         }

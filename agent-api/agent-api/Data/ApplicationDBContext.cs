@@ -19,20 +19,31 @@ namespace agent_api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<AgentModel>()
-                .HasMany(agent => agent.Missions)
-                .WithOne(mission => mission.Agent)
-                .HasForeignKey(mission => mission.AgentId)
-                .OnDelete(DeleteBehavior.NoAction);
-                
-                
+                .HasKey(agent => agent.AgentId);
+            modelBuilder.Entity<TargetModel>()
+                .HasKey(target => target.TargetId);
+            modelBuilder.Entity<MissionModel>()
+                .HasKey(mission => mission.MissionId);
+
+
+            modelBuilder.Entity<AgentModel>()
+                .Property(agent => agent.AgentStatus)
+                .HasConversion<string>()
+                .IsRequired();
 
             modelBuilder.Entity<TargetModel>()
-                .HasOne(target => target.Mission)
-                .WithOne(mission => mission.Target)
-                .HasForeignKey<MissionModel>(mission => mission.TargetId)
-                .OnDelete(DeleteBehavior.NoAction);
-                
+                .Property(target => target.TargetStatus)
+                .HasConversion<string>()
+                .IsRequired();
+
+            modelBuilder.Entity<MissionModel>()
+                .Property(mission => mission.MissionStatus)
+                .HasConversion<string>()
+                .IsRequired();
+
+
 
             modelBuilder.Entity<AgentModel>()
                 .HasOne(agent => agent.AgentLocation)
@@ -55,6 +66,19 @@ namespace agent_api.Data
                 .OnDelete(DeleteBehavior.NoAction);
                 
 
+
+            modelBuilder.Entity<AgentModel>()
+                .HasMany(agent => agent.Missions)
+                .WithOne(mission => mission.Agent)
+                .HasForeignKey(mission => mission.AgentId);
+
+
+
+            modelBuilder.Entity<TargetModel>()
+                .HasMany(target => target.Missions)
+                .WithOne(mission => mission.Target)
+                .HasForeignKey(mission => mission.TargetId);
+            
 
         }
 

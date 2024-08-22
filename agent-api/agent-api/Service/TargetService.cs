@@ -2,36 +2,16 @@
 using agent_api.Dto;
 using agent_api.Model;
 using Microsoft.EntityFrameworkCore;
+using static agent_api.Utils.ConvertUtils;
+using static agent_api.Utils.LocationUtils;
+
 
 namespace agent_api.Service
 {
     public class TargetService(ApplicationDBContext dBContext) : ITargetInterface
     {
 
-        static Func<TargetDto, TargetModel> TargetDtoToTargetModel =
-            (dto) => new()
-            {
-                TargetId = dto.TargetId,
-                TargetName = dto.Name,
-                TargetRole = dto.notes,
-                TargetPicture = dto.Image,
-                TargetStatus = dto.TargetStatus,
-                TargetLocation = dto.TargetLocation
-            };
-
-        static Func<TargetModel, TargetDto> TargetModelToTargetDto =
-            (model) => new()
-            {
-                TargetId = model.TargetId,
-                TargetStatus = model.TargetStatus,
-                Image = model.TargetPicture,
-                Name = model.TargetName,
-                notes = model.TargetRole,
-                TargetLocation = model.TargetLocation
-            };
-
-
-
+        
 
         public async Task<TargetDto> CreateTargetAsync(TargetDto targetDto)
         {
@@ -50,15 +30,22 @@ namespace agent_api.Service
 
         public async Task PinTargetAsync(PinLocationDto pinLocation, long id)
         {
-            TargetModel targetToPin = await dBContext.Targets
-                .Include(target => target.TargetLocation)
-                .FirstOrDefaultAsync(target => target.TargetId == id)
-                ?? throw new Exception($"Target by id:{id} not found ");
+            if (IsLocationLegal(pinLocation))
+            {
 
-            targetToPin.TargetLocation.x = pinLocation.x;
-            targetToPin.TargetLocation.y = pinLocation.y;
-            await dBContext.SaveChangesAsync();
-                     
+                TargetModel targetToPin = await dBContext.Targets
+                    .Include(target => target.TargetLocation)
+                    .FirstOrDefaultAsync(target => target.TargetId == id)
+                    ?? throw new Exception($"Target by id:{id} not found ");
+
+                targetToPin.TargetLocation.x = pinLocation.x;
+                targetToPin.TargetLocation.y = pinLocation.y;
+                await dBContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("cannot pin user at elegal location");
+            }
         }
     }
 }

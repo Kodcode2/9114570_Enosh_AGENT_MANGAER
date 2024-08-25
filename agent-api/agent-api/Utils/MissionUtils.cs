@@ -1,4 +1,5 @@
-﻿using agent_api.Model;
+﻿using agent_api.Dto;
+using agent_api.Model;
 using static agent_api.Utils.DistanceUtils;
 namespace agent_api.Utils
 {
@@ -46,5 +47,31 @@ namespace agent_api.Utils
         public static Func<LocationModel, LocationModel, bool> IsSameLocation =
             (location1, location2) => location1.y == location2.y && location1.x == location2.x;
 
+
+
+
+
+        public static Func<MissionModel, MissionDto> MissionModelToMissionDto =
+            (model) => new()
+            {
+                MissionId = model.MissionId,
+                AgentId = model.AgentId,
+                TargetId = model.TargetId,
+                agentX = model.Agent.AgentLocation.x,
+                agentY = model.Agent.AgentLocation.y,
+                TargetX = model.Target.TargetLocation.x,
+                TargetY = model.Target.TargetLocation.y,
+                TargetName = model.Target.TargetName,
+                AgentNickName = model.Agent.AgentNickName,
+                AgentStatus = model.Agent.AgentStatus,
+                TargetStatus  = model.Target.TargetStatus,
+                MissionStatus = model.MissionStatus,
+                MissionCompletedTime = model.MissionCompletedTime,
+                MissionTime = model.MissionTime,
+                AgentPicture = model.Agent.AgentPicture,
+                TargetPicture = model.Target.TargetPicture, 
+                TargetRole = model.Target.TargetRole,
+                
+            };
     }
 }

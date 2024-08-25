@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using static agent_api.Utils.DistanceUtils;
 using static agent_api.Utils.Validations;
 using static agent_api.Utils.MissionUtils;
+using System.Reflection;
+using agent_api.Dto;
 namespace agent_api.Service
 {
     public class MissionService(ApplicationDBContext dBContext) : IMissionService
@@ -108,6 +110,18 @@ namespace agent_api.Service
             var tasks = missions.Select(UpdateMission);
             await Task.WhenAll(tasks);
 
+        }
+
+        public async Task<List<MissionDto>> GetAllMissionsAsync()
+        {
+            var missionModels = await dBContext.Missions
+                    .Include(mission => mission.Agent)
+                    .ThenInclude(agent => agent.AgentLocation)
+                    .Include(mission => mission.Target)
+                    .ThenInclude(target => target.TargetLocation)
+                    .ToListAsync();
+            List<MissionDto> missionDtos = missionModels.Select(MissionModelToMissionDto).ToList();
+            return missionDtos;
         }
     }
 }

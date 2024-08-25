@@ -1,4 +1,5 @@
-﻿using agent_api.Model;
+﻿using agent_api.Dto;
+using agent_api.Model;
 
 namespace agent_api.Service
 {
@@ -8,5 +9,7 @@ namespace agent_api.Service
         Task CreateMissionsAsync(TargetModel targetModel);
         Task UpdateMissionsAsync();
         Task AssignMissionAsync(long missionId);
+
+        Task<List<MissionDto>> GetAllMissionsAsync();
     }
 }

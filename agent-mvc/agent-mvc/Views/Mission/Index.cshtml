@@ -1,0 +1,131 @@
+﻿@model IEnumerable<agent_mvc.ViewModels.MissionVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MissionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MissionTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MissionStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MissionCompletedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgentNickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgentPicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.agentX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.agentY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetPicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetY)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionCompletedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgentNickName)
+            </td>
+            <td>
+                <img src="@item.AgentPicture" alt="@item.AgentPicture" style="max-height:500px; max-width:500px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.agentX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.agentY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetRole)
+            </td>
+            <td>
+                    <img src="@item.TargetPicture" alt="@item.TargetPicture" style="max-height:500px; max-width:500px;" />
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetY)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

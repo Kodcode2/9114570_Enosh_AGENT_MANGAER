@@ -6,7 +6,8 @@
     <title>@ViewData["Title"] - agent_mvc</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/agent_mvc.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/agent_mvc.styles.css" asp-append-version="true" />
+	<link href="~/css/table.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -24,6 +25,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="Index">Missions</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Grid" asp-action="Index">Grid</a>
                         </li>
                     </ul>
                 </div>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RjGdwkAXWToSbQVrCL/oe3cwo8Dzs81J2Y9wj3mbpJI=",
+  "Hash": "ZLH90S/EklqWR1fUV167q4wf4ncAM3ldJrFSYEhdm2Q=",
   "Source": "agent-mvc",
   "BasePath": "_content/agent-mvc",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-mvc\\agent-mvc\\wwwroot\\css\\Table.css",
+      "SourceId": "agent-mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-mvc\\agent-mvc\\wwwroot\\",
+      "BasePath": "_content/agent-mvc",
+      "RelativePath": "css/Table.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Table.css"
     },
     {
       "Identity": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-mvc\\agent-mvc\\wwwroot\\favicon.ico",

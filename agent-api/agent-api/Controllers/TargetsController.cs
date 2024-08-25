@@ -20,7 +20,7 @@ namespace agent_api.Controllers
             try
             {
                 TargetDto newTarget = await targetService.CreateTargetAsync(targetDto);
-                return Created("new target", newTarget);
+                return CreatedAtAction(nameof(CreateTarget),newTarget);
             }
             catch (Exception ex)
             {

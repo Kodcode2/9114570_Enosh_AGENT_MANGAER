@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using static agent_api.Utils.AgentUtils;
 using static agent_api.Utils.LocationUtils;
 namespace agent_api.Service
-{
+{ 
     public class AgentService(ApplicationDBContext dBContext, IMissionService missionService) : IAgentService
     {
         public async Task<AgentDto> CreateAgentAsync(AgentDto targetDto)
@@ -25,9 +25,14 @@ namespace agent_api.Service
 
         public async Task MoveAgentLocationAsync(DirectionDto direction, long id)
         {
-            AgentModel agent = await GetAgentByIdAsync(id);
-            var newLocation = UpdateLocation(agent.AgentLocation, direction);
-            await SetAgentLocation(newLocation, id);
+            try
+            {
+                AgentModel agentToMove = await GetAgentByIdAsync(id);
+                var newLocation = UpdateLocation(agentToMove.AgentLocation, direction);
+                await SetAgentLocation(newLocation, agentToMove);
+            }
+            catch {  }
+            
         }
 
 
@@ -38,12 +43,11 @@ namespace agent_api.Service
                 ?? throw new Exception($"Agent by id:{id} not found ");
 
 
-        private async Task SetAgentLocation(LocationDto Location, long id)
+        private async Task SetAgentLocation(LocationDto Location, AgentModel agentToSet)
         {
             if (IsLocationLegal(Location))
             {
 
-                AgentModel agentToSet = await GetAgentByIdAsync(id);
 
                 agentToSet.AgentLocation.x = Location.x;
                 agentToSet.AgentLocation.y = Location.y;
@@ -59,7 +63,12 @@ namespace agent_api.Service
 
         public async Task PinAgentLocationAsync(LocationDto pinLocation, long id)
         {
-            await SetAgentLocation(pinLocation, id);
+            try
+            {
+                AgentModel agentToPin = await GetAgentByIdAsync(id);
+                await SetAgentLocation(pinLocation, agentToPin);
+            }
+            catch { }
         }
     }
 }

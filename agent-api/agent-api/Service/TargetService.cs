@@ -30,9 +30,13 @@ namespace agent_api.Service
 
         public async Task MoveTargetLocationAsync(DirectionDto direction, long id)
         {
-            TargetModel target = await GetTargetByIdAsync(id);
-            var newLocation = UpdateLocation(target.TargetLocation, direction);
-            await SetTargetLocation(newLocation, id);
+            try
+            {
+                TargetModel targetToMove = await GetTargetByIdAsync(id);
+                var newLocation = UpdateLocation(targetToMove.TargetLocation, direction);
+                await SetTargetLocation(newLocation, targetToMove);
+            }
+            catch { }
         }
 
 
@@ -43,16 +47,15 @@ namespace agent_api.Service
                 ?? throw new Exception($"Target by id:{id} not found ");
 
 
-        private async Task SetTargetLocation(LocationDto Location, long id)
+        private async Task SetTargetLocation(LocationDto Location, TargetModel targetToSet)
         {
             if (IsLocationLegal(Location))
             {
 
-                TargetModel targetToPin = await GetTargetByIdAsync(id);
-                targetToPin.TargetLocation.x = Location.x;
-                targetToPin.TargetLocation.y = Location.y;
+                targetToSet.TargetLocation.x = Location.x;
+                targetToSet.TargetLocation.y = Location.y;
                 await dBContext.SaveChangesAsync();
-                await missionService.CreateMissionsAsync(targetToPin);
+                await missionService.CreateMissionsAsync(targetToSet);
             }
             else
             {
@@ -63,7 +66,12 @@ namespace agent_api.Service
 
         public async Task PinTargetLocationAsync(LocationDto pinLocation, long id)
         {
-            await SetTargetLocation(pinLocation, id);
+            try
+            {
+                TargetModel targetToPin = await GetTargetByIdAsync(id);
+                await SetTargetLocation(pinLocation, targetToPin);
+            }
+            catch { }
         }
     }
 }

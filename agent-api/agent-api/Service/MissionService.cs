@@ -3,34 +3,30 @@ using agent_api.Model;
 using Microsoft.EntityFrameworkCore;
 using static agent_api.Utils.DistanceUtils;
 using static agent_api.Utils.Validations;
+using static agent_api.Utils.MissionUtils;
 namespace agent_api.Service
 {
     public class MissionService(ApplicationDBContext dBContext) : IMissionService
     {
 
-        static Func<AgentModel, TargetModel, bool> AreInDistanceForMission =
-            (agent, target) => IsDistanceLessThan200KM(agent.AgentLocation, target.TargetLocation);
+        async Task UpdateMission(MissionModel mission)
+        {
+           LocationModel moveToLocation = FastestRouteToTarget(mission.Agent.AgentLocation, mission.Target.TargetLocation);          
+            mission.Agent.AgentLocation = moveToLocation;
+            if (IsSameLocation(moveToLocation, mission.Target.TargetLocation))
+            {                          
+                mission.MissionStatus = MissionStatus.Completed;
+                mission.Target.TargetStatus = TargetStatus.Eliminated;
+                mission.Agent.AgentStatus = AgentStatus.SleepingCell;
 
+            }
+            dBContext.Missions.Update(mission);
+            await dBContext.SaveChangesAsync();
 
-        static Func<AgentModel, TargetModel, MissionModel> CreateMissionModel =
-            (agent, target) => new()
-            {
-                AgentId = agent.AgentId,
-                TargetId = target.TargetId,
-            };
+        }
+       
 
-        static Func<List<AgentModel>, TargetModel, List<MissionModel>> CreateListOfMissionModelsWithOneTarget =
-            (agents, target) => agents.Select(agent => CreateMissionModel(agent, target)).ToList();
-
-        static Func<List<TargetModel>, AgentModel, List<MissionModel>> CreateListOfMissionModelsWithOneAgent =
-            (targets, agent) => targets.Select(target => CreateMissionModel(agent, target)).ToList();
-
-        static Func<MissionModel, MissionModel, bool> HasSameTargetId =
-            (mission1, mission2) => mission1.TargetId == mission2.TargetId;
-        static Func<MissionModel, MissionModel, bool> HasSameAgentId =
-            (mission1, mission2) => mission1.AgentId == mission2.AgentId;
-        static Func<MissionModel, MissionModel, bool> IsSameMission =
-            (mission1, mission2) => HasSameTargetId(mission1, mission2) && HasSameAgentId(mission1, mission2);
+        
 
         // how do i add an await
         async Task<List<MissionModel>> RemoveDuplicateMissions(List<MissionModel> missions)
@@ -84,22 +80,34 @@ namespace agent_api.Service
             }
         }
 
-        public async Task AssignMissionAsync(MissionModel mission)
+        public async Task AssignMissionAsync(long Missionid)
         {
-            if (IsMissionValid(mission))
-            {
-                MissionModel missionToAssign = await dBContext.Missions
-                    .Include(m => m.Agent)
-                    .ThenInclude(agent => agent.AgentLocation)
-                    .Include(m => m.Target)
-                    .ThenInclude(target => target.TargetLocation)
-                    .FirstOrDefaultAsync(m => m.MissionId == mission.MissionId)
-                    ?? throw new Exception($"could not find mission by mission id {mission.MissionId}");
+            MissionModel mission = await dBContext.Missions.Include(m => m.Agent).Include(m => m.Target)
+                .FirstOrDefaultAsync(m => m.MissionId == Missionid)
+                ?? throw new Exception($"mission by id{Missionid} not found");
 
-                missionToAssign.MissionStatus = MissionStatus.InProgress;
-                missionToAssign.Agent.AgentStatus = AgentStatus.ActiveCell;
-                missionToAssign.Target.TargetStatus = TargetStatus.Targeted;
+            if (IsMissionValid(mission))
+            {              
+                mission.MissionStatus = MissionStatus.InProgress;
+                mission.Agent.AgentStatus = AgentStatus.ActiveCell;
+                mission.Target.TargetStatus = TargetStatus.Targeted;             
+                await dBContext.SaveChangesAsync();
             }
+        }
+
+        public async Task UpdateMissionsAsync()
+        {
+            
+            var missions = await dBContext.Missions
+                .Where(mission => mission.MissionStatus == MissionStatus.InProgress)
+                .Include(mission => mission.Agent)
+                .ThenInclude(agent => agent.AgentLocation)
+                .Include(mission => mission.Target)
+                .ThenInclude(target => target.TargetLocation)
+                .ToListAsync();
+            var tasks = missions.Select(UpdateMission);
+            await Task.WhenAll(tasks);
+
         }
     }
 }

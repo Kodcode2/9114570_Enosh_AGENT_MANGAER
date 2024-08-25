@@ -4,9 +4,9 @@ namespace agent_api.Dto
 {
     public class AgentDto
     {
-        public long AgentId { get; set; }
-        public required string AgentNickName { get; set; }
-        public required string AgentPicture { get; set; }
+        public long Id { get; set; }
+        public required string nickname { get; set; }
+        public required string photoUrl { get; set; }
         public AgentStatus AgentStatus { get; set; } = AgentStatus.SleepingCell;
         public LocationModel AgentLocation { get; set; } = new LocationModel();
     }

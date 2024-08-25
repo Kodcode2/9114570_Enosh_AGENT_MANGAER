@@ -14,12 +14,12 @@ namespace agent_api.Controllers
         [ProducesResponseType(typeof(TargetDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<AgentDto>> CreateTarget([FromBody] AgentDto agentDto)
+        public async Task<ActionResult<AgentDto>> CreateAgent([FromBody] AgentDto agentDto)
         {
             try
             {
                 AgentDto newAgent = await agentService.CreateAgentAsync(agentDto);
-                return Created("new agent", newAgent);
+                return CreatedAtAction(nameof(CreateAgent), newAgent);
             }
             catch (Exception ex)
             {
@@ -48,7 +48,7 @@ namespace agent_api.Controllers
         [HttpPut("{id}/Pin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> PinTarget([FromBody] LocationDto pinLocation, long id)
+        public async Task<ActionResult> MoveAgent([FromBody] LocationDto pinLocation, long id)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace agent_api.Controllers
         [HttpPut("{id}/Move")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> MoveTarget([FromBody] DirectionDto direction, long id)
+        public async Task<ActionResult> MoveAgent([FromBody] DirectionDto direction, long id)
         {
             try
             {

@@ -10,10 +10,10 @@ namespace agent_api.Utils
         public static Func<TargetDto, TargetModel> TargetDtoToTargetModel =
             (dto) => new()
             {
-                TargetId = dto.TargetId,
-                TargetName = dto.Name,
-                TargetRole = dto.notes,
-                TargetPicture = dto.Image,
+                TargetId = dto.Id,
+                TargetName = dto.name,
+                TargetRole = dto.position,
+                TargetPicture = dto.photoUrl,
                 TargetStatus = dto.TargetStatus,
                 TargetLocation = dto.TargetLocation
             };
@@ -21,15 +21,15 @@ namespace agent_api.Utils
         public static Func<TargetModel, TargetDto> TargetModelToTargetDto =
             (model) => new()
             {
-                TargetId = model.TargetId,
+                Id = model.TargetId,
                 TargetStatus = model.TargetStatus,
-                Image = model.TargetPicture,
-                Name = model.TargetName,
-                notes = model.TargetRole,
+                photoUrl = model.TargetPicture,
+                name = model.TargetName,
+                position = model.TargetRole,
                 TargetLocation = model.TargetLocation
             };
 
-
+       
 
     }
 }

@@ -9,9 +9,9 @@ namespace agent_api.Utils
         public static Func<AgentDto, AgentModel> AgentDtoToAgentModel =
            (dto) => new()
            {
-            AgentId = dto.AgentId,
-            AgentNickName = dto.AgentNickName,
-            AgentPicture = dto.AgentPicture,
+            AgentId = dto.Id,
+            AgentNickName = dto.nickname,
+            AgentPicture = dto.photoUrl,
             AgentLocation = dto.AgentLocation,
             AgentStatus = dto.AgentStatus
                
@@ -20,9 +20,9 @@ namespace agent_api.Utils
         public static Func<AgentModel, AgentDto> AgentModelToAgentDto =
             (model) => new()
             {
-                AgentId = model.AgentId,
-                AgentNickName = model.AgentNickName,
-                AgentPicture = model.AgentPicture,
+                Id = model.AgentId,
+                nickname = model.AgentNickName,
+                photoUrl = model.AgentPicture,
                 AgentLocation = model.AgentLocation,
                 AgentStatus = model.AgentStatus
 

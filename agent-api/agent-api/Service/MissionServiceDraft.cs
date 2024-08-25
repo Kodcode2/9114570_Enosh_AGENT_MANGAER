@@ -5,7 +5,7 @@ using static agent_api.Utils.DistanceUtils;
 using static agent_api.Utils.Validations;
 namespace agent_api.Service
 {
-    public class MissionServiceDraft(ApplicationDBContext dBContext) : IMissionService
+    public class MissionServiceDraft(ApplicationDBContext dBContext)
     {
 
         static Func<AgentModel, TargetModel, bool> AreInDistanceForMission =

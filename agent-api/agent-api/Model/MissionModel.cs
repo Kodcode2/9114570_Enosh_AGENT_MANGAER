@@ -16,7 +16,6 @@ namespace agent_api.Model
         public long MissionId { get; set; }
         public long AgentId { get; set; }
         public long TargetId { get; set; }
-        public long MissionFinalLocationId { get; set; }
 
         public double MissionTime { get; set; }
 
@@ -28,6 +27,5 @@ namespace agent_api.Model
 
         public TargetModel Target { get; set; }
 
-        public LocationModel MissionFinalLocation { get; set; } = new LocationModel();
     }
 }

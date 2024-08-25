@@ -12,7 +12,7 @@ using agent_api.Data;
 namespace agent_api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240822062704_IntialCreate")]
+    [Migration("20240825071954_IntialCreate")]
     partial class IntialCreate
     {
         /// <inheritdoc />
@@ -89,9 +89,6 @@ namespace agent_api.Migrations
                     b.Property<DateTime>("MissionCompletedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("MissionFinalLocationId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("MissionStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -105,9 +102,6 @@ namespace agent_api.Migrations
                     b.HasKey("MissionId");
 
                     b.HasIndex("AgentId");
-
-                    b.HasIndex("MissionFinalLocationId")
-                        .IsUnique();
 
                     b.HasIndex("TargetId");
 
@@ -168,12 +162,6 @@ namespace agent_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("agent_api.Model.LocationModel", "MissionFinalLocation")
-                        .WithOne()
-                        .HasForeignKey("agent_api.Model.MissionModel", "MissionFinalLocationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("agent_api.Model.TargetModel", "Target")
                         .WithMany("Missions")
                         .HasForeignKey("TargetId")
@@ -181,8 +169,6 @@ namespace agent_api.Migrations
                         .IsRequired();
 
                     b.Navigation("Agent");
-
-                    b.Navigation("MissionFinalLocation");
 
                     b.Navigation("Target");
                 });

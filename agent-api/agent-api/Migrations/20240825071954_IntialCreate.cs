@@ -76,7 +76,6 @@ namespace agent_api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AgentId = table.Column<long>(type: "bigint", nullable: false),
                     TargetId = table.Column<long>(type: "bigint", nullable: false),
-                    MissionFinalLocationId = table.Column<long>(type: "bigint", nullable: false),
                     MissionTime = table.Column<double>(type: "float", nullable: false),
                     MissionStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MissionCompletedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -90,11 +89,6 @@ namespace agent_api.Migrations
                         principalTable: "Agents",
                         principalColumn: "AgentId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Missions_LocationModel_MissionFinalLocationId",
-                        column: x => x.MissionFinalLocationId,
-                        principalTable: "LocationModel",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Missions_Targets_TargetId",
                         column: x => x.TargetId,
@@ -113,12 +107,6 @@ namespace agent_api.Migrations
                 name: "IX_Missions_AgentId",
                 table: "Missions",
                 column: "AgentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Missions_MissionFinalLocationId",
-                table: "Missions",
-                column: "MissionFinalLocationId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Missions_TargetId",

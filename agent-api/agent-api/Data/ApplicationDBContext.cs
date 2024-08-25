@@ -59,11 +59,6 @@ namespace agent_api.Data
                 .OnDelete(DeleteBehavior.NoAction);
                 
 
-            modelBuilder.Entity<MissionModel>()
-                .HasOne(target => target.MissionFinalLocation)
-                .WithOne()
-                .HasForeignKey<MissionModel>(mission => mission.MissionFinalLocationId)
-                .OnDelete(DeleteBehavior.NoAction);
                 
 
 

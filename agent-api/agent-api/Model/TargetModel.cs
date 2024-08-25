@@ -6,6 +6,7 @@ namespace agent_api.Model
     public enum TargetStatus
     {
         Alive,
+        Targeted,
         Eliminated
     }
     public class TargetModel

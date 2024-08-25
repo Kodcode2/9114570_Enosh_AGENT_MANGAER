@@ -7,5 +7,6 @@ namespace agent_api.Service
         Task CreateMissionsAsync(AgentModel agentModel);
         Task CreateMissionsAsync(TargetModel targetModel);
 
+        Task AssignMissionAsync(MissionModel missionModel);
     }
 }

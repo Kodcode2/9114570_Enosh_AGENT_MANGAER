@@ -36,7 +36,10 @@ namespace agent_api.Service
                 var newLocation = UpdateLocation(targetToMove.TargetLocation, direction);
                 await SetTargetLocation(newLocation, targetToMove);
             }
-            catch { }
+            catch (Exception ex) 
+            {
+                throw ex;
+            }
         }
 
 
@@ -71,7 +74,10 @@ namespace agent_api.Service
                 TargetModel targetToPin = await GetTargetByIdAsync(id);
                 await SetTargetLocation(pinLocation, targetToPin);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using agent_api.Model;
-
+using static agent_api.Utils.DistanceUtils;
 namespace agent_api.Utils
 {
     public class Validator<T>
@@ -20,16 +20,17 @@ namespace agent_api.Utils
     public class Validations
     {
 
-        static Predicate<MissionModel> IsTargetAlive =
-           (mission) => mission.Target.TargetStatus == TargetStatus.Alive;
-        static Predicate<MissionModel> IsAgentAvailable =
-            (mission) => mission.Agent.AgentStatus == AgentStatus.SleepingCell;
+        public static Predicate<TargetModel> IsTargetAvailable =
+           (target) => target.TargetStatus == TargetStatus.Alive;
+        public static Predicate<AgentModel> IsAgentAvailable =
+            (agent) => agent.AgentStatus == AgentStatus.SleepingCell;
        
 
-        public static Predicate<MissionModel> IsTargetAvailbleForMission =
-          (target) => Validator<MissionModel>.Of(target)
-          .Validate(IsTargetAlive)
-          .Validate(IsTargetAvailbleForMission)
+        public static Predicate<MissionModel> IsMissionValid =
+          (mission) => Validator<MissionModel>.Of(mission)
+          .Validate(mission => IsTargetAvailable(mission.Target))
+          .Validate(mission => IsAgentAvailable(mission.Agent))
+          .Validate(mission=> IsDistanceLessThan200KM(mission.Agent.AgentLocation, mission.Target.TargetLocation))
           .IsValid;
 
     }

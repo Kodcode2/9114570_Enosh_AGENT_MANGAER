@@ -26,6 +26,7 @@ namespace agent_api.Utils
 
         public static Func<DirectionDto, (int x, int y)> DirectionDtoToCoordinates =
             (dto) => CoordinatesDictionary.GetValueOrDefault(dto.direction);
+            
 
         public static Func<LocationModel, (int x, int y), LocationDto> UpdateLocationAccordingToCoordinates =
             (location, coordinates) => new() { x = location.x + coordinates.x, y = location.y + coordinates.y };

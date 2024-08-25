@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("agent-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f623f9198704f8fde489f787855ce7da38242f8c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23ee317f4e66b21c774f2547b346f66e21355edb")]
 [assembly: System.Reflection.AssemblyProductAttribute("agent-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("agent-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

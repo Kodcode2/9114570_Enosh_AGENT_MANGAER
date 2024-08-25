@@ -21,6 +21,7 @@ namespace agent_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UpdateMissions()
         {
+            
             await missionService.UpdateMissionsAsync();
             return Ok();
 

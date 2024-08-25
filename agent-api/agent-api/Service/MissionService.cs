@@ -30,12 +30,24 @@ namespace agent_api.Service
 
         
 
-        // how do i add an await
-        async Task<List<MissionModel>> RemoveDuplicateMissions(List<MissionModel> missions)
+        // make async
+        bool MissionIsUnique(MissionModel mission)
+            =>  !dBContext.Missions.Any(m => m.AgentId == mission.AgentId && m.TargetId == mission.TargetId);
+            
+            
+       async Task RemoveNonValidMissions()
         {
-            var a = await dBContext.Missions.ToListAsync();
-            var b = missions.Where(m => !a.Any(s => IsSameMission(s, m))).ToList();
-            return b;
+            var missionsToRemove = await dBContext.Missions
+                .Where(mission => (mission.MissionStatus == MissionStatus.IntialContract
+                &&  mission.Agent.AgentStatus == AgentStatus.ActiveCell)
+                ||
+                (mission.MissionStatus == MissionStatus.IntialContract
+                &&  mission.Target.TargetStatus == TargetStatus.Targeted))              
+                .ToListAsync();
+
+            dBContext.RemoveRange(missionsToRemove);
+            await dBContext.SaveChangesAsync();
+            
         }
 
 
@@ -61,7 +73,7 @@ namespace agent_api.Service
                     .Where(target => AreInDistanceForMission(agent, target))
                     .ToList();
                 List<MissionModel> missions = CreateListOfMissionModelsWithOneAgent(validTargets, agent);
-                List<MissionModel> uniqueMissions = await RemoveDuplicateMissions(missions);
+                List<MissionModel> uniqueMissions = missions.Where(MissionIsUnique).ToList();
                 await AddMissionsAsync(uniqueMissions);
             }
             
@@ -77,7 +89,7 @@ namespace agent_api.Service
                 List<AgentModel> validAgents = agents.Where(agent => IsAgentAvailable(agent))
                     .Where(agent => AreInDistanceForMission(agent, target)).ToList();
                 List<MissionModel> missions = CreateListOfMissionModelsWithOneTarget(agents, target);
-                List<MissionModel> uniqueMissions = await RemoveDuplicateMissions(missions);
+                List<MissionModel> uniqueMissions = missions.Where(MissionIsUnique).ToList();
                 await AddMissionsAsync(uniqueMissions);
             }
         }
@@ -99,7 +111,7 @@ namespace agent_api.Service
 
         public async Task UpdateMissionsAsync()
         {
-            
+            await RemoveNonValidMissions();
             var missions = await dBContext.Missions
                 .Where(mission => mission.MissionStatus == MissionStatus.InProgress)
                 .Include(mission => mission.Agent)
@@ -107,8 +119,10 @@ namespace agent_api.Service
                 .Include(mission => mission.Target)
                 .ThenInclude(target => target.TargetLocation)
                 .ToListAsync();
-            var tasks = missions.Select(UpdateMission);
-            await Task.WhenAll(tasks);
+            foreach (var mission in missions)
+            {
+                await UpdateMission(mission);
+            }
 
         }
 

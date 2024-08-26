@@ -1,9 +1,10 @@
-﻿using agent_mvc.ViewModels;
+﻿using agent_mvc.Models;
+using agent_mvc.ViewModels;
 using System.Text.Json;
 
 namespace agent_mvc.Services
 {
-    public class GridService(IHttpClientFactory clientFactory) : IGridService
+    public class GridService(IHttpClientFactory clientFactory, Authentication auth) : IGridService
     {
         string baseUrl = "https://localhost:7275/View/";
 
@@ -19,6 +20,7 @@ namespace agent_mvc.Services
         {
             HttpClient httpClient = clientFactory.CreateClient();
             HttpRequestMessage httpRequest = new(HttpMethod.Get, baseUrl + "Agents");
+            httpRequest.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth.token);
             HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
 
             if (response.IsSuccessStatusCode)
@@ -33,6 +35,7 @@ namespace agent_mvc.Services
         {
             HttpClient httpClient = clientFactory.CreateClient();
             HttpRequestMessage httpRequest = new(HttpMethod.Get, baseUrl + "Targets");
+            httpRequest.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth.token);
             HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
 
             if (response.IsSuccessStatusCode)

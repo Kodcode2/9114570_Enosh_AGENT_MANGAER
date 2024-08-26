@@ -1,3 +1,4 @@
+using agent_mvc.Models;
 using agent_mvc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IGridService, GridService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddSingleton<Authentication>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

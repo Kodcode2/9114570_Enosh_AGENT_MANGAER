@@ -1,20 +1,22 @@
 using agent_mvc.Models;
+using agent_mvc.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using agent_mvc.Dto;
 
 namespace agent_mvc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILoginService loginService, ILogger<HomeController> logger, Authentication token) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger = logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+       
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            LoginDto loginDto = new LoginDto() { id = "MvcServer"};
+            token.token = await loginService.LoginAsync(loginDto);
+
             return View();
         }
 

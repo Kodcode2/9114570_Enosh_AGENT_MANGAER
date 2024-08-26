@@ -1,5 +1,6 @@
 ﻿using agent_api.Dto;
 using agent_api.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,7 @@ namespace agent_api.Controllers
 
 
         [HttpPost("Update")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UpdateMissions()
         {
@@ -23,6 +25,7 @@ namespace agent_api.Controllers
         }
 
         [HttpGet("Assign/{missionId}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AssignMission(long missionId)

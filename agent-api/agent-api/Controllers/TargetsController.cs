@@ -1,6 +1,7 @@
 ﻿using agent_api.Dto;
 using agent_api.Model;
 using agent_api.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace agent_api.Controllers
     {
 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(typeof(TargetDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -34,6 +36,7 @@ namespace agent_api.Controllers
 
 
         [HttpPut("{id}/Pin")]
+        [Authorize] 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> PinTarget([FromBody] LocationDto pinLocation, long id)
@@ -45,6 +48,7 @@ namespace agent_api.Controllers
         }
         
         [HttpPut("{id}/Move")]
+        [Authorize] 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> MoveTarget([FromBody] DirectionDto direction, long id)

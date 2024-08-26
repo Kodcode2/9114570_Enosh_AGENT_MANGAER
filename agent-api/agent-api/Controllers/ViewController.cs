@@ -1,5 +1,6 @@
 ﻿using agent_api.Dto;
 using agent_api.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace agent_api.Controllers
     {
 
         [HttpGet("Agents")]
+        [Authorize]
         [ProducesResponseType(typeof(List<TargetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<AgentDto>>> GetAllAgents()
@@ -27,6 +29,7 @@ namespace agent_api.Controllers
 
 
         [HttpGet("Missions")]
+        [Authorize] 
         [ProducesResponseType(typeof(List<MissionDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<List<MissionDto>>> GetAllMissions()
         {
@@ -36,6 +39,7 @@ namespace agent_api.Controllers
 
 
         [HttpGet("Targets")]
+        [Authorize] 
         [ProducesResponseType(typeof(List<TargetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<TargetDto>>> GetAllTargets()

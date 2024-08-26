@@ -1,9 +1,10 @@
-﻿using agent_mvc.ViewModels;
+﻿using agent_mvc.Models;
+using agent_mvc.ViewModels;
 using System.Text.Json;
-
+using System.Net.Http.Headers;
 namespace agent_mvc.Services
 {
-    public class DashboardService(IHttpClientFactory clientFactory) : IDashboardService
+    public class DashboardService(IHttpClientFactory clientFactory, Authentication auth) : IDashboardService
     {
 
         string baseUrl = "https://localhost:7275/View/";
@@ -13,6 +14,7 @@ namespace agent_mvc.Services
         {
             HttpClient httpClient = clientFactory.CreateClient();
             HttpRequestMessage httpRequest = new(HttpMethod.Get, baseUrl + infoType);
+            httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", auth.token);
             HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
 
             if (response.IsSuccessStatusCode)

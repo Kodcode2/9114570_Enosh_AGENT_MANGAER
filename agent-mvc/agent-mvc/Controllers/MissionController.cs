@@ -6,9 +6,7 @@ namespace agent_mvc.Controllers
 {
     public class MissionController(IMissionService missionService) : Controller
     {
-        public async Task<IActionResult> Index() 
-            => View(await missionService.GetAllMissions());
-        
+       
            
 
             

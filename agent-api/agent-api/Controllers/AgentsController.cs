@@ -29,20 +29,6 @@ namespace agent_api.Controllers
 
 
 
-        [HttpGet]
-        [ProducesResponseType(typeof(List<TargetDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<List<AgentDto>>> GetAllAgents()
-        {
-            try
-            {
-                return Ok(await agentService.GetAllAgentsAsync());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
 
         [HttpPut("{id}/Pin")]

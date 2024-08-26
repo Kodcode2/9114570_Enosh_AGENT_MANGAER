@@ -3,7 +3,7 @@ using agent_api.Model;
 
 namespace agent_api.Service
 {
-    public interface ITargetInterface
+    public interface ITargetService
     {
         Task<List<TargetDto>> GetAllTargetsAsync();
         Task<TargetDto> CreateTargetAsync(TargetDto targetDto);

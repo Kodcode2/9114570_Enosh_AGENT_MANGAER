@@ -9,12 +9,7 @@ namespace agent_api.Controllers
     [ApiController]
     public class MissionsController(IMissionService missionService) : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<List<MissionDto>>> GetAllMissions()
-        {
-            return Ok(await missionService.GetAllMissionsAsync());
-
-        }
+       
 
 
         [HttpPost("Update")]

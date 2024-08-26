@@ -5,12 +5,12 @@ namespace agent_mvc.Services
 {
     public class MissionService(IHttpClientFactory clientFactory) : IMissionService
     {
-        string baseUrl = "https://localhost:7275/Missions/";
+        string baseUrl = "https://localhost:7275/View/Missions";
 
         public async Task<List<MissionVM>> GetAllMissions()
         {
             HttpClient httpClient = clientFactory.CreateClient();
-            HttpRequestMessage httpRequest = new(HttpMethod.Get, baseUrl);
+            HttpRequestMessage httpRequest = new(HttpMethod.Get, baseUrl);          
             HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
 
             if (response.IsSuccessStatusCode)

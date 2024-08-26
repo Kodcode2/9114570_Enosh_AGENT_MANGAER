@@ -1,0 +1,36 @@
+﻿@model (List<agent_mvc.ViewModels.AgentVM>, List<agent_mvc.ViewModels.TargetVm>, List<agent_mvc.ViewModels.MissionVM>)
+
+	
+	<div class="info"> 
+		<h1>Total Agents</h1>
+		<h2>@Model.Item1.Count</h2>
+	</div>
+	<div class="info"> 
+		<h1>Total Active Agents</h1>
+		<h2>@Model.Item1.Where(a => a.AgentStatus == agent_mvc.Model.AgentStatus.ActiveCell).Count()</h2>
+	</div>
+	<div class="info"> 
+		<h1>Total Targets</h1>
+		<h2>@Model.Item2.Count</h2>
+	</div>
+	<div class="info"> 
+		<h1>Total Elimnated Targets</h1>
+	<h2>@Model.Item2.Where(t => t.TargetStatus == agent_mvc.Model.TargetStatus.Eliminated).Count()</h2>
+</div>
+	<div class="info"> 
+		<h1>Total Missions</h1>
+		<h2>@Model.Item3.Count</h2>
+	</div>
+	<div class="info"> 
+		<h1>Total Missions in progress</h1>
+	<h2>@Model.Item3.Where(m => m.MissionStatus == agent_mvc.Model.MissionStatus.InProgress).Count()</h2>
+</div>
+	<div class="info"> 
+	<a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Agents">View Agents</a>
+	</div>
+	<div class="info">
+	<a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Targets">View Targets</a>
+	</div>
+	<div class="info">
+	<a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Missions">View Missions</a>
+	</div>

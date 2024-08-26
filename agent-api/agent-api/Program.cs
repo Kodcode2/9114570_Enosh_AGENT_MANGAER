@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextFactory<ApplicationDBContext>();
-builder.Services.AddScoped<ITargetInterface, TargetService>();
+builder.Services.AddScoped<ITargetService, TargetService>();
 builder.Services.AddScoped<IAgentService, AgentService>();
 builder.Services.AddScoped<IMissionService, MissionService>();
 var app = builder.Build();

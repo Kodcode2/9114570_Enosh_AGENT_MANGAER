@@ -1,12 +1,51 @@
-﻿<table border="1">
+﻿@model (List<agent_mvc.ViewModels.AgentVM>, List<agent_mvc.ViewModels.TargetVm>)
+
+
+<table border="1">
  
     <tbody>
-        @foreach (int i in Enumerable.Range(1, 100))
+        @foreach (int x in Enumerable.Range(1, 100))
         {
         <tr>
-            @foreach (int j in Enumerable.Range(1, 100))
+            @foreach (int y in Enumerable.Range(1, 100))
             {
-                <td></td>
+                <td>
+                    @foreach (agent_mvc.ViewModels.AgentVM agent in Model.Item1)
+                    {
+                            @if (agent.AgentLocation.x == x && agent.AgentLocation.y == y)
+                            {
+                                @if (agent.AgentStatus == agent_mvc.Model.AgentStatus.SleepingCell)
+                                {
+                                    <p style="color: green">#@agent.Id</p>
+                                }
+                                @if (agent.AgentStatus == agent_mvc.Model.AgentStatus.ActiveCell)
+                                {
+                                    <p style="color: blue">#@agent.Id</p>
+
+                                }
+                            }
+                           
+                        } 
+                        @foreach (agent_mvc.ViewModels.TargetVm target in Model.Item2)
+                    {
+                            @if (target.TargetLocation.x == x && target.TargetLocation.y == y)
+                            {
+                                @if (target.TargetStatus == agent_mvc.Model.TargetStatus.Alive)
+                                {
+                                    <p style="color: green">$@target.Id</p>
+                                } 
+                                @if (target.TargetStatus == agent_mvc.Model.TargetStatus.Targeted)
+                                {
+                                    <p style="color: blue">$@target.Id</p>
+                                }
+                                @if (target.TargetStatus == agent_mvc.Model.TargetStatus.Eliminated)
+                                {
+                                    <p style="color: red">$@target.Id</p>
+                                }
+                            }
+                           
+                        }
+                </td>
             }
         </tr>
         }

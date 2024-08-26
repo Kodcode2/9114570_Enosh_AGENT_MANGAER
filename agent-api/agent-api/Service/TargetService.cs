@@ -8,7 +8,7 @@ using static agent_api.Utils.LocationUtils;
 
 namespace agent_api.Service
 {
-    public class TargetService(ApplicationDBContext dBContext, IMissionService missionService) : ITargetInterface
+    public class TargetService(ApplicationDBContext dBContext, IMissionService missionService) : ITargetService
     {
 
         

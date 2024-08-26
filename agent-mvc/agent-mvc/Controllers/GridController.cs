@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using agent_mvc.Services;
+using agent_mvc.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace agent_mvc.Controllers
 {
-    public class GridController : Controller
+    public class GridController(IGridService gridService) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await gridService.GetAllAgentsAndTargetsAsync());
         }
     }
 }

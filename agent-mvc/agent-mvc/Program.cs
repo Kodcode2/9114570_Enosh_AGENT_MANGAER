@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IMissionService, MissionService>();
+builder.Services.AddScoped<IGridService, GridService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

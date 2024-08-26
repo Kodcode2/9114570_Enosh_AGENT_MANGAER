@@ -1,0 +1,57 @@
+﻿@model (List<agent_mvc.ViewModels.AgentVM>, List<agent_mvc.ViewModels.TargetVm>, List<agent_mvc.ViewModels.MissionVM>)
+
+@{
+    ViewData["Title"] = "Missions";
+}
+
+<p>
+    Missions
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Item3.First().MissionId)
+            </th>
+            <th>
+                Agent Name
+            </th>
+            <th>
+                Target Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item3.First().MissionTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item3.First().MissionStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Item3) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionId)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => Model.Item1.FirstOrDefault(agent => agent.Id == item.AgentId).nickname)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => Model.Item2.FirstOrDefault(target => target.Id == item.TargetId).name)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.MissionTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MissionStatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MissionId}) |
+                @Html.ActionLink("Details", "Details", new {  id=item.MissionId}) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MissionId})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

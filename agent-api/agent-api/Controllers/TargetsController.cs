@@ -8,7 +8,7 @@ namespace agent_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class TargetsController(ITargetInterface targetService) : ControllerBase
+    public class TargetsController(ITargetService targetService) : ControllerBase
     {
 
         [HttpPost]
@@ -30,20 +30,7 @@ namespace agent_api.Controllers
 
 
 
-        [HttpGet]
-        [ProducesResponseType(typeof(List<TargetDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<List<TargetDto>>> GetAllTargets()
-        {
-            try
-            {
-                return Ok(await targetService.GetAllTargetsAsync());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+       
 
 
         [HttpPut("{id}/Pin")]

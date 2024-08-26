@@ -1,0 +1,64 @@
+﻿@model IEnumerable<agent_mvc.ViewModels.TargetVm>
+
+@{
+    ViewData["Title"] = "Targets";
+}
+
+<h1>Targets</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.photoUrl)
+            </th>
+            <th>
+               Location
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.position)
+            </td>
+            <td>
+                    <img src="@item.photoUrl" alt="@item.photoUrl" style="max-height:500px; max-width:500px;" />
+            </td>
+                <td>
+                    x:y
+                    @item.TargetLocation.x:@item.TargetLocation.y
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TargetStatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

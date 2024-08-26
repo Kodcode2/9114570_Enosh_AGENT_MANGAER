@@ -10,6 +10,7 @@ builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IGridService, GridService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IGetService, GetService>();
 builder.Services.AddSingleton<Authentication>();
 var app = builder.Build();
 

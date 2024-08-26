@@ -5,16 +5,18 @@ using System.Text.Json;
 
 namespace agent_mvc.Services
 {
-    public class LoginService(IHttpClientFactory clientFactory) : ILoginService
+    public class LoginService(IHttpClientFactory clientFactory, Authentication auth) : ILoginService
     {
         string baseUrl = "https://localhost:7275/Login/";
 
 
-        public async Task<string> LoginAsync(LoginDto login)
+        public async Task LoginAsync()
         {
+            LoginDto loginDto = new LoginDto() { id = "MvcServer" };
+
             HttpClient httpClient = clientFactory.CreateClient();
             HttpRequestMessage httpRequest = new(HttpMethod.Post, baseUrl);
-            var httpBody = JsonContent.Create(login);
+            var httpBody = JsonContent.Create(loginDto);
             httpRequest.Content = httpBody;
             HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
 
@@ -22,7 +24,8 @@ namespace agent_mvc.Services
             {
                 string content = await response.Content.ReadAsStringAsync();
                 TokenDto token = JsonSerializer.Deserialize<TokenDto>(content, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                return token.token;
+                auth.token = token.token;
+                return;
             }
             throw new Exception($"could not login");
         } 

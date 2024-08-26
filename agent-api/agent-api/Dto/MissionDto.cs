@@ -14,18 +14,6 @@ namespace agent_api.Dto
 
         public DateTime MissionCompletedTime { get; set; }
 
-
-        public string AgentNickName { get; set; }
-        public string AgentPicture { get; set; }
-        public AgentStatus AgentStatus { get; set; } = AgentStatus.SleepingCell;
-        public int agentX { get; set; }
-        public int agentY { get; set; }
-
-        public string TargetName { get; set; }
-        public string TargetRole { get; set; }
-        public string TargetPicture { get; set; }
-        public TargetStatus TargetStatus { get; set; } = TargetStatus.Alive;
-        public int TargetX { get; set; }
-        public int TargetY { get; set; }
+        
     }
 }

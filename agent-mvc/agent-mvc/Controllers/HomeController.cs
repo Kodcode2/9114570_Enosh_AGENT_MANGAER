@@ -6,7 +6,7 @@ using agent_mvc.Dto;
 
 namespace agent_mvc.Controllers
 {
-    public class HomeController(ILoginService loginService, ILogger<HomeController> logger, Authentication token) : Controller
+    public class HomeController(ILoginService loginService, ILogger<HomeController> logger) : Controller
     {
         private readonly ILogger<HomeController> _logger = logger;
 
@@ -14,8 +14,7 @@ namespace agent_mvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            LoginDto loginDto = new LoginDto() { id = "MvcServer"};
-            token.token = await loginService.LoginAsync(loginDto);
+           await loginService.LoginAsync();
 
             return View();
         }

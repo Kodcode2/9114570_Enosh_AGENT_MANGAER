@@ -50,13 +50,13 @@ namespace agent_api.Service
                 ?? throw new Exception($"Target by id:{id} not found ");
 
 
-        private async Task SetTargetLocation(LocationDto Location, TargetModel targetToSet)
+        private async Task SetTargetLocation(LocationDto location, TargetModel targetToSet)
         {
-            if (IsLocationLegal(Location))
+            if (IsLocationLegal(location))
             {
 
-                targetToSet.TargetLocation.x = Location.x;
-                targetToSet.TargetLocation.y = Location.y;
+                targetToSet.TargetLocation.x = location.x;
+                targetToSet.TargetLocation.y = location.y;
                 await dBContext.SaveChangesAsync();
                 await missionService.CreateMissionsAsync(targetToSet);
             }

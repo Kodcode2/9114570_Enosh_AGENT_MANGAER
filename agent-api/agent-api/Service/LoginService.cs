@@ -2,17 +2,17 @@
 {
     public class LoginService(IJwtService jwtService) : ILoginService
     {
-        static List<String> AutherisedServers = ["SimulationServer", "MvcServer"];
+        static List<string> AuthorizedServers = ["SimulationServer", "MvcServer"];
         public string Login(string serverName)
         {
-            if (AutherisedServers.Contains(serverName))
+            if (AuthorizedServers.Contains(serverName))
             {
                 return jwtService.GenerateToken(serverName);
 
             }
-            throw new Exception("This server is unautherised");
+            throw new Exception("This server is unauthorized");
 
         }
-
+        
     }
 }

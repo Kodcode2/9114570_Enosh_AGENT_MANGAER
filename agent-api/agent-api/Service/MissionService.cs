@@ -29,10 +29,8 @@ namespace agent_api.Service
 
         }
        
-
+   
         
-
-        // make async
         bool MissionIsUnique(MissionModel mission)
             =>  !dBContext.Missions.Any(m => m.AgentId == mission.AgentId && m.TargetId == mission.TargetId);
             
@@ -52,17 +50,6 @@ namespace agent_api.Service
             await dBContext.SaveChangesAsync();
             
         }
-
-
-
-        async Task AddMissionsAsync(List<MissionModel> missions)
-        {
-           
-            await dBContext.AddRangeAsync(missions);
-            await dBContext.SaveChangesAsync();
-        }
-
-
 
 
         public async Task CreateMissionsAsync(AgentModel agent)
@@ -133,17 +120,18 @@ namespace agent_api.Service
             }
 
         }
-
         public async Task<List<MissionDto>> GetAllMissionsAsync()
         {
-            var missionModels = await dBContext.Missions
-                    .Include(mission => mission.Agent)
-                    .ThenInclude(agent => agent.AgentLocation)
-                    .Include(mission => mission.Target)
-                    .ThenInclude(target => target.TargetLocation)
+            var missionModels = await dBContext.Missions                  
                     .ToListAsync();
             List<MissionDto> missionDtos = missionModels.Select(MissionModelToMissionDto).ToList();
             return missionDtos;
+        }
+        async Task AddMissionsAsync(List<MissionModel> missions)
+        {
+           
+            await dBContext.AddRangeAsync(missions);
+            await dBContext.SaveChangesAsync();
         }
     }
 }

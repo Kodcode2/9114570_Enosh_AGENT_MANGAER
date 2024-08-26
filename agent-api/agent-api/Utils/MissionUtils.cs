@@ -56,21 +56,11 @@ namespace agent_api.Utils
             {
                 MissionId = model.MissionId,
                 AgentId = model.AgentId,
-                TargetId = model.TargetId,
-                agentX = model.Agent.AgentLocation.x,
-                agentY = model.Agent.AgentLocation.y,
-                TargetX = model.Target.TargetLocation.x,
-                TargetY = model.Target.TargetLocation.y,
-                TargetName = model.Target.TargetName,
-                AgentNickName = model.Agent.AgentNickName,
-                AgentStatus = model.Agent.AgentStatus,
-                TargetStatus  = model.Target.TargetStatus,
+                TargetId = model.TargetId,             
                 MissionStatus = model.MissionStatus,
                 MissionCompletedTime = model.MissionCompletedTime,
                 MissionTime = model.MissionTime,
-                AgentPicture = model.Agent.AgentPicture,
-                TargetPicture = model.Target.TargetPicture, 
-                TargetRole = model.Target.TargetRole,
+                
                 
             };
     }

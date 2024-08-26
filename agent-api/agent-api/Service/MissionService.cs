@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using static agent_api.Utils.DistanceUtils;
 using static agent_api.Utils.Validations;
 using static agent_api.Utils.MissionUtils;
+using static agent_api.Utils.TimeUtils;
 using System.Reflection;
 using agent_api.Dto;
 namespace agent_api.Service
@@ -15,6 +16,7 @@ namespace agent_api.Service
         {
            LocationModel moveToLocation = FastestRouteToTarget(mission.Agent.AgentLocation, mission.Target.TargetLocation);          
             mission.Agent.AgentLocation = moveToLocation;
+            mission.MissionTime = RemainingTimeFromMissionModel(mission);
             if (IsSameLocation(moveToLocation, mission.Target.TargetLocation))
             {                          
                 mission.MissionStatus = MissionStatus.Completed;
@@ -36,16 +38,17 @@ namespace agent_api.Service
             
             
        async Task RemoveNonValidMissions()
-        {
-            var missionsToRemove = await dBContext.Missions
-                .Where(mission => (mission.MissionStatus == MissionStatus.IntialContract
-                &&  mission.Agent.AgentStatus == AgentStatus.ActiveCell)
-                ||
-                (mission.MissionStatus == MissionStatus.IntialContract
-                &&  mission.Target.TargetStatus == TargetStatus.Targeted))              
-                .ToListAsync();
+        {           
+            var missionsThatAgentIsBusy = dBContext.Missions
+                .Where(mission => mission.MissionStatus == MissionStatus.IntialContract &&
+                  mission.Agent.AgentStatus == AgentStatus.ActiveCell).AsEnumerable();
 
-            dBContext.RemoveRange(missionsToRemove);
+            var missionsThatTargetIaBusy = dBContext.Missions
+                .Where(mission => mission.MissionStatus == MissionStatus.IntialContract
+                && mission.Target.TargetStatus == TargetStatus.Targeted); 
+                                                         
+            dBContext.RemoveRange(missionsThatAgentIsBusy);
+            dBContext.RemoveRange(missionsThatTargetIaBusy);
             await dBContext.SaveChangesAsync();
             
         }
@@ -96,7 +99,11 @@ namespace agent_api.Service
 
         public async Task AssignMissionAsync(long Missionid)
         {
-            MissionModel mission = await dBContext.Missions.Include(m => m.Agent).Include(m => m.Target)
+            MissionModel mission = await dBContext.Missions
+                .Include(m => m.Agent)
+                .ThenInclude(agent => agent.AgentLocation)
+                .Include(m => m.Target)
+                .ThenInclude(target => target.TargetLocation)
                 .FirstOrDefaultAsync(m => m.MissionId == Missionid)
                 ?? throw new Exception($"mission by id{Missionid} not found");
 
@@ -104,7 +111,8 @@ namespace agent_api.Service
             {              
                 mission.MissionStatus = MissionStatus.InProgress;
                 mission.Agent.AgentStatus = AgentStatus.ActiveCell;
-                mission.Target.TargetStatus = TargetStatus.Targeted;             
+                mission.Target.TargetStatus = TargetStatus.Targeted;  
+                mission.MissionTime = RemainingTimeFromMissionModel(mission);
                 await dBContext.SaveChangesAsync();
             }
         }

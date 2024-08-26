@@ -4,6 +4,7 @@ namespace agent_mvc.Services
 {
     public interface IMissionService
     {
-        Task<List<MissionVM>> GetAllMissions();
+       
+        bool AssignMission(long id);
     }
 }

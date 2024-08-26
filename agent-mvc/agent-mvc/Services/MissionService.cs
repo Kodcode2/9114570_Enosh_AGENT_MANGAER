@@ -5,21 +5,19 @@ namespace agent_mvc.Services
 {
     public class MissionService(IHttpClientFactory clientFactory) : IMissionService
     {
-        string baseUrl = "https://localhost:7275/View/Missions";
-
-        public async Task<List<MissionVM>> GetAllMissions()
+        string baseUrl = "https://localhost:7275/Missions/";
+            
+        public  bool AssignMission(long id)
         {
             HttpClient httpClient = clientFactory.CreateClient();
-            HttpRequestMessage httpRequest = new(HttpMethod.Get, baseUrl);          
+            HttpRequestMessage httpRequest = new(HttpMethod.Get, baseUrl + $"Assign/{id}");          
             HttpResponseMessage response = httpClient.SendAsync(httpRequest).Result;
 
-            if (response.IsSuccessStatusCode)
-            {
-               string content = await response.Content.ReadAsStringAsync();
-                List<MissionVM> missions = JsonSerializer.Deserialize<List<MissionVM>>(content, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                return missions;
-            }
-            throw new Exception("error");
+            return response.IsSuccessStatusCode;
+            
         }
+
+
+
     }
 }

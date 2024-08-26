@@ -47,9 +47,9 @@
                 @Html.DisplayFor(modelItem => item.MissionStatus)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MissionId}) |
-                @Html.ActionLink("Details", "Details", new {  id=item.MissionId}) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MissionId})
+                @if (item.MissionStatus == agent_mvc.Model.MissionStatus.IntialContract)
+                @Html.ActionLink("Assign Mission", "AssignMission", "Mission", new { id=item.MissionId}) 
+               
             </td>
         </tr>
 }

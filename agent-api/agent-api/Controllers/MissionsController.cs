@@ -22,7 +22,7 @@ namespace agent_api.Controllers
 
         }
 
-        [HttpPut("Assign/{missionId}")]
+        [HttpGet("Assign/{missionId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> AssignMission(long missionId)
@@ -30,7 +30,7 @@ namespace agent_api.Controllers
             try
             {
                 await missionService.AssignMissionAsync(missionId);
-                return NoContent();
+                return Ok();
             }
             catch (Exception ex)
             {

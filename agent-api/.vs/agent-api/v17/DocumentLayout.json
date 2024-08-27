@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\utils\\agentutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|solutionrelative:agent-api\\utils\\agentutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\service\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|solutionrelative:agent-api\\service\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\dto\\agentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|solutionrelative:agent-api\\dto\\agentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\controllers\\viewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|solutionrelative:agent-api\\controllers\\viewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|solutionrelative:agent-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\controllers\\targetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\service\\targetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|solutionrelative:agent-api\\service\\targetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|c:\\users\\1\\source\\repos\\agents\\9114570_enosh_agent_mangaer\\agent-api\\agent-api\\service\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9247199-DD16-4B53-94A9-438A557421CB}|agent-api\\agent-api.csproj|solutionrelative:agent-api\\service\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,19 +59,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AgentUtils.cs",
+              "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Utils\\AgentUtils.cs",
+              "RelativeDocumentMoniker": "agent-api\\Utils\\AgentUtils.cs",
+              "ToolTip": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Utils\\AgentUtils.cs",
+              "RelativeToolTip": "agent-api\\Utils\\AgentUtils.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAjwAIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-27T07:15:32.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AgentDto.cs",
+              "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Dto\\AgentDto.cs",
+              "RelativeDocumentMoniker": "agent-api\\Dto\\AgentDto.cs",
+              "ToolTip": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Dto\\AgentDto.cs",
+              "RelativeToolTip": "agent-api\\Dto\\AgentDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-27T07:13:15.129Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Program.cs",
+              "RelativeDocumentMoniker": "agent-api\\Program.cs",
+              "ToolTip": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Program.cs",
+              "RelativeToolTip": "agent-api\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-27T06:23:36.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ViewController.cs",
               "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Controllers\\ViewController.cs",
               "RelativeDocumentMoniker": "agent-api\\Controllers\\ViewController.cs",
               "ToolTip": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Controllers\\ViewController.cs",
               "RelativeToolTip": "agent-api\\Controllers\\ViewController.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-26T17:23:58.214Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "TargetsController.cs",
               "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Controllers\\TargetsController.cs",
               "RelativeDocumentMoniker": "agent-api\\Controllers\\TargetsController.cs",
@@ -67,12 +118,11 @@
               "RelativeToolTip": "agent-api\\Controllers\\TargetsController.cs",
               "ViewState": "AQIAACgAAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T17:23:54.687Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T17:23:54.687Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "MissionsController.cs",
               "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Controllers\\MissionsController.cs",
               "RelativeDocumentMoniker": "agent-api\\Controllers\\MissionsController.cs",
@@ -80,12 +130,11 @@
               "RelativeToolTip": "agent-api\\Controllers\\MissionsController.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T17:23:52.396Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T17:23:52.396Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "agent-api\\Controllers\\LoginController.cs",
@@ -93,12 +142,11 @@
               "RelativeToolTip": "agent-api\\Controllers\\LoginController.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAAAQwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T17:23:50.138Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T17:23:50.138Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "agentsController.cs",
               "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Controllers\\agentsController.cs",
               "RelativeDocumentMoniker": "agent-api\\Controllers\\agentsController.cs",
@@ -106,12 +154,11 @@
               "RelativeToolTip": "agent-api\\Controllers\\agentsController.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAowAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T17:23:45.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T17:23:45.625Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "TargetService.cs",
               "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Service\\TargetService.cs",
               "RelativeDocumentMoniker": "agent-api\\Service\\TargetService.cs",
@@ -119,18 +166,17 @@
               "RelativeToolTip": "agent-api\\Service\\TargetService.cs",
               "ViewState": "AQIAACAAAAAAAAAAAAAwwDgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-26T17:22:31.757Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-26T17:22:31.757Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "AgentService.cs",
               "DocumentMoniker": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Service\\AgentService.cs",
               "RelativeDocumentMoniker": "agent-api\\Service\\AgentService.cs",
               "ToolTip": "C:\\Users\\1\\source\\repos\\Agents\\9114570_Enosh_AGENT_MANGAER\\agent-api\\agent-api\\Service\\AgentService.cs",
               "RelativeToolTip": "agent-api\\Service\\AgentService.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAwwDMAAAANAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBgAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-26T17:20:03.285Z",
               "EditorCaption": ""

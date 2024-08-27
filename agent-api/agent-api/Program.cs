@@ -1,5 +1,4 @@
 using agent_api.Data;
-using agent_api.MiddleWare;
 using agent_api.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

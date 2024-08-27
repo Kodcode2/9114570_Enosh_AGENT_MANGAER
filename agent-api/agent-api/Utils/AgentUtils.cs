@@ -24,7 +24,9 @@ namespace agent_api.Utils
                 nickname = model.AgentNickName,
                 photoUrl = model.AgentPicture,
                 AgentLocation = model.AgentLocation,
-                AgentStatus = model.AgentStatus
+                AgentStatus = model.AgentStatus,
+                TotalKills = model.Missions.Where(m => m.MissionStatus == MissionStatus.Completed).Count()
+                
 
             };
 

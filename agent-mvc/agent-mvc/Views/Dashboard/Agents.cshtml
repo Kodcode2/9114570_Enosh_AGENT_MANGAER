@@ -25,6 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.AgentStatus)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalKills)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -46,6 +49,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AgentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalKills)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |

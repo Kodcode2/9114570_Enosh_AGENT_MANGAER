@@ -19,7 +19,9 @@ namespace agent_api.Service
 
         public async Task<List<AgentDto>> GetAllAgentsAsync()
         {
-            List<AgentModel> agents = await dBContext.Agents.Include(target => target.AgentLocation).ToListAsync();
+            List<AgentModel> agents = await dBContext.Agents.Include(agent => agent.AgentLocation)
+                .Include(agent => agent.Missions)
+                .ToListAsync();
             return agents.Select(AgentModelToAgentDto).ToList();
         }
 
@@ -41,8 +43,8 @@ namespace agent_api.Service
 
         private async Task<AgentModel> GetAgentByIdAsync(long id)
             => await dBContext.Agents
-                .Include(t => t.AgentLocation)
-                .FirstOrDefaultAsync(t => t.AgentId == id)
+                .Include(a => a.AgentLocation)
+                .FirstOrDefaultAsync(a => a.AgentId == id)
                 ?? throw new Exception($"Agent by id:{id} not found ");
 
 

@@ -9,5 +9,6 @@ namespace agent_mvc.ViewModels
         public required string photoUrl { get; set; }
         public AgentStatus AgentStatus { get; set; } = AgentStatus.SleepingCell;
         public LocationModel AgentLocation { get; set; } = new LocationModel();
+        public int TotalKills { get; set; }
     }
 }
